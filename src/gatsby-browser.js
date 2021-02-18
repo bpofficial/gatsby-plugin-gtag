@@ -18,9 +18,18 @@ exports.onRouteUpdate = ({ location }) => {
   if (anonymize) {
     anonymizeObj = { anonymize_ip: true };
   }
-
-  window.gtag('config', trackingId, {
-    page_path: locationStr,
-    ...anonymizeObj,
-  });
+ 
+  if (trackingId.includes(',')) {
+    trackindId.split(id => {
+      window.gtag('config', id, {
+        page_path: locationStr,
+        ...anonymizeObj,
+      });
+    })
+  } else {
+    window.gtag('config', trackingId, {
+      page_path: locationStr,
+      ...anonymizeObj,
+    });
+  }
 };
